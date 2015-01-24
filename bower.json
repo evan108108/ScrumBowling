@@ -1,0 +1,27 @@
+{
+  "name": "ScrumBowling",
+  "version": "0.0.1",
+  "homepage": "https://github.com/evan108108/ScrumBowling",
+  "authors": [
+    "rachel cantor <rachel.cantor@controlgroup.com>",
+    "evan frohlich <evan.frohlich@controlgroup.com>"
+  ],
+  "description": "Polymer + ScrumBowling",
+  "main": "scrumbowling.html",
+  "keywords": [
+    "polymer",
+    "scrum"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.4"
+  }
+}
