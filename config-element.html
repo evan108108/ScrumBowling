@@ -1,32 +1,42 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
 <polymer-element name="config-element">
   <template>
-    <p>
-      <label for="firstDayOfSprintInput">Sprint Begins On:</label>
-      <select id="firstDayOfSprintInput" value="{{first_day_of_sprint.value}}">
-        <option value="M">Monday</option>
-        <option value="T">Tuesday</option>
-        <option value="W">Wednesday</option>
-        <option value="TH">Thursday</option>
-        <option value="F">Friday</option>
-      </select>
-    </p>
-    <p>
-      <label for="maxPointsInput">Max Points Per Day:</label>
-      <input id="maxPointsInput" value="{{max_points_per_day}}">
-    </p>
+    <div horizontal around-justified layout>
+      <div>
+        <p>
+          <label for="firstDayOfSprintInput">Sprint Begins On:</label>
+          <select id="firstDayOfSprintInput" value="{{first_day_of_sprint}}">
+            <option value="M">Monday</option>
+            <option value="T">Tuesday</option>
+            <option value="W">Wednesday</option>
+            <option value="TH">Thursday</option>
+            <option value="F">Friday</option>
+          </select>
+        </p>
+      </div>
+      <div>
+        <p>
+          <label for="maxPointsInput">Max Points Per Day:</label>
+          <input id="maxPointsInput" value="{{max_points_per_day}}">
+        </p>
+      </div>
+    </div>
     <template repeat="{{sprinters}}">
+      <div horizontal layout>
         <paper-input-decorator label="Name" floatingLabel>
           <input value="{{name}}">
         </paper-input-decorator>
+        <div>&nbsp;</div>
         <paper-input-decorator label="Days Available" floatingLabel>
           <input value="{{days_available}}">
         </paper-input-decorator>
-     
-      <b>{{name}}</b> has <span style="days_available: {{days_available}}">{{days_available}}</span> available days.
+        <div>
+          <p><b>{{name}}</b> has <span style="days_available: {{days_available}}">{{days_available}}</span> available days.</p>
+        </div>
+    </div>
      </template>
      <p>
-      <paper-button class="colored custom">
+      <paper-button class="colored custom" on-click="{{onClick}}">
         <core-icon icon="check"></core-icon>
         update
       </paper-button>
@@ -41,7 +51,8 @@
       created: function() {
         //set up initial values
         this.max_points_per_day = 5,
-        this.first_day_of_sprint = { day: 'Wednesday', value:'W'},
+        this.SPRINT_DAYS = [ "W", "TH", "F", "M", "T", "W", "TH", "F", "M", "T" ],
+        this.first_day_of_sprint = "W",
         this.days_of_sprint = [
           { day: 'Monday', value: 'M' },
           { day: 'Tuesday', value: 'T' },
@@ -59,6 +70,23 @@
           { name: "Ryan", days_available: 10 }
         ];
       },
+      observe: {
+        first_day_of_sprint:'changeSprintDays',
+        max_points_per_day:'changeMaxPoints'
+      },
+      changeSprintDays: function(oldValue,newValue) {
+        console.log(oldValue);
+        console.log(newValue);
+        var index=this.SPRINT_DAYS.indexOf(newValue);
+        console.log(index);
+        for (var x=0; x<index; x++) {
+          this.SPRINT_DAYS.push(this.SPRINT_DAYS.shift());
+        }
+        console.log(this.SPRINT_DAYS);
+      },
+      changeMaxPoints: function(oldValue,newValue) {
+        // what do we need to do here?
+      },
       nameChanged: function() {
         if (this.name) {
           this.name = this.name[0].toUpperCase() +
@@ -69,6 +97,13 @@
         if (this.days_available > 10) {
           $('input#daysInput').addClass('error');
         }
+      },
+      publish: {
+        max_points:this.max_points_per_day,
+        days_of_sprint:this.SPRINT_DAYS
+      },
+      onClick: function() {
+        this.fire(cgsb.init());
       }
     });
   </script>

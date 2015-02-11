@@ -1,6 +1,6 @@
 var cgsb = {
 	config: {
-		SPRINT_DAYS: [ "W", "Th", "F", "M", "T", "W", "TH", "F", "M", "T" ],
+		SPRINT_DAYS: days_of_sprint,
 		POINT_VALUES: [-20, -13, -8, -5, -3, -2, 0, 2, 3, 5, 8, 13, 20],
 		HALF_DAYS: 1,
 		TEAM: [
@@ -12,7 +12,7 @@ var cgsb = {
 			{ name: "Kosta", days_available: 10 },
 			{ name: "Ryan", days_available: 10 }
 		],
-		MAX_POINTS_PER_DAY: 5,
+		MAX_POINTS_PER_DAY: max_points,
 		EMPTY_FRAME_CHAR: '-',
 		SCRUB_BOWLING_ID: 'scrum_bowling',
 		TEAM_MEMBER_INDEX_ATTRIBUTE_NAME: 'team_member_index',
@@ -145,6 +145,7 @@ var cgsb = {
 		});
 	},
 	init: function() {
+		cgsb.getValues();
 		cgsb.drawTable();
 		cgsb.drawTeamMemberDropDown();
 		cgsb.drawPointsDropDown();
@@ -152,6 +153,6 @@ var cgsb = {
 	}
 }
 
-$( document ).ready( function(){
-	cgsb.init();
-});
+// $( document ).ready( function(){
+// 	cgsb.init();
+// });

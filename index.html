@@ -99,38 +99,26 @@
     }
 </style>
 </head>
-<body fullbleed vertical layout unresolved>
-	<core-header-panel flex>
-		<core-toolbar class="medium-tall">
-		  	<span flex>Scrum Bowling</span>
-			<paper-tabs class="bottom fit" selected="{{ selected }}" selectedindex="0" horizontal center layout>
-				<paper-tab>Scrum Config</paper-tab>
-				<paper-tab>Scrum Bowl</paper-tab>
-			</paper-tabs>
-		</core-toolbar>
-
-		<core-animated-pages selected="{{ selected }}" selectedindex="0" transitions="slide-from-right" horizontal layout one flex>
-			<section flex vertical layout>
-	        	<div layout vertical center center-justified flex>
-	        		<config-element></config-element>
-	        	</div>
-	        </section>
-			<section flex horizontal layout>
-	          <div layout vertical center center-justified flex>
-	        	<scrum-bowling-element></scrum-bowling-element>
-	          	<div id="scrum_bowling"></div>
-	          </div>
-	        </section>
-		</core-animated-pages>
-
-</core-header-panel>
+<body vertical layout unresolved>
+  <core-header-panel flex>
+  	<core-toolbar>
+      <span>Scrum Bowling</span>
+  	</core-toolbar>
+    <div horizontal around-justified layout>
+    	<div>
+    		<config-element></config-element>
+    	</div>
+      <div>
+      </div>
+      <div>
+      	<scrum-bowling-element></scrum-bowling-element>
+        <div id="scrum_bowling"></div>
+      </div>
+    </div>
+  </core-header-panel>
+  
 	<script>
-		var tabs = document.querySelector('paper-tabs');
-		var pages = document.querySelector('core-animated-pages');
-		tabs.selected=0;
-		tabs.addEventListener('core-select', function() {
-			pages.selected=this.selected;
-		})
+
 	</script>
 </body>
 
